@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,
+						initial-scale=1.0" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Acme&family=Shantell+Sans&display=swap" rel="stylesheet">
+	<title>QR Code Generator</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+	</script>
+</head>
+
+<body>
+	<div class="card">
+		<div class="card2">
+	<header>
+		<h1>
+			<span class="H">Q</span><span class="A1">R</span>-<span class="R1">G</span><span class="D">E</span><span class="W">N</span><span class="R">E</span><span class="O">R</span><span class="J">A</span><span class="E">T</span><span class="C">O</span><span class="T">R</span> </h1><br/>
+		<h2>~ AYUSH</h2><br />
+		<h3>Enter QR code content and generate QR</h3><br />
+	</header>
+	<main class="centered-main">
+		<form action="/" id="qr-generation-form">
+				<div class="form__group field">
+					<input type="text" name="qr-code-content" id="qr-content" value="" placeholder="Enter QR content" autocomplete="off" class="form__field"/>
+
+					<label class="form__label" for="name">Enter QR content</label>
+				</div><br/>
+			<input type="submit" value="Generate QR Code" class="button"/>
+		</form><br/><br/>
+		<div id="qr-code"></div>
+	</main>
+		</div>
+	</div>
+</body>
+<script>
+
+
+	// This line gets the element with the ID "qr-content" and assigns it to the variable qrContentInput
+	let qrContentInput = document.getElementById("qr-content");
+
+
+	//This line gets the element with the ID "qr-generation-form" and assigns it to the variable qrGenerationForm/.
+
+
+	let qrGenerationForm =
+		document.getElementById("qr-generation-form");
+		//  This line declares a variable called qrCode and assigns it an initial value of undefined.
+	let qrCode;
+
+
+//  This is a function that takes a qrContent parameter and returns a new QRCode instance with some configuration options.
+// This line creates a new QRCode instance with the element with ID "qr-code" as the target, and some configuration options such as the text, width, height, colorDark, colorLight, and correctLevel.	
+function generateQrCode(qrContent) {
+		return new QRCode("qr-code", {
+			text: qrContent,
+			width: 256,
+			height: 256,
+			colorDark: "#000000",
+			colorLight: "#ffffff",
+			correctLevel: QRCode.CorrectLevel.H,
+		});
+	}
+
+
+//This line adds an event listener to the submit event of the qrGenerationForm element, which is a callback function that handles the form submission.
+	// Event listener for form submit event
+
+
+	qrGenerationForm.addEventListener("submit", function (event) {
+
+		// This line prevents the default form submission behavior, which would cause the page to reload.
+		// Prevent form submission
+		event.preventDefault();
+
+		//  This line gets the value of the qrContentInput element and assigns it to the variable qrContent.
+		let qrContent = qrContentInput.value;
+
+
+		// This is an if statement that checks if qrCode is null or undefined.
+		if (qrCode == null) {
+
+
+// This line generates a new QR code with the generateQrCode function and assigns it to the qrCode variable.
+			// Generate code initially
+			qrCode = generateQrCode(qrContent);
+		} else {
+
+
+// This line updates the existing QR code with the makeCode method, passing in the new qrContent value.
+			// If code already generated then make
+			// again using same object
+			qrCode.makeCode(qrContent);
+
+
+		}
+	});
+</script>
+
+</html>
+
